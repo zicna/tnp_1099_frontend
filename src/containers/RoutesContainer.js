@@ -5,6 +5,7 @@ import Home from "../pages/Home"
 import Profile from "../pages/Profile"
 import Welcome from "../pages/Welcome"
 import Contact from "../pages/Contact"
+import PageNotFound from "../pages/PageNotFound";
 
 export default function RoutesContainer(){
     return(
@@ -16,6 +17,7 @@ export default function RoutesContainer(){
                 <Route path="/profile" element={<Profile/>}></Route>
                 <Route path="/about" element={<About/>}></Route>
                 <Route path="/contact" element={<Contact/>}></Route>
+                <Route path="*" element={<PageNotFound />}></Route>
             </Routes>
         </div>
 
