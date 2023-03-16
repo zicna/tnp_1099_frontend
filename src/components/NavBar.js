@@ -8,13 +8,16 @@ export default function NavBar() {
             <NavLink to="/home">HOME</NavLink>
         </li>
         <li>
+            <NavLink to="/profile">PROFILE</NavLink>
+        </li>
+        <li>
+            <NavLink to="/login">LOGIN</NavLink>
+        </li>
+        <li>
             <NavLink to="/about">ABOUT</NavLink>
         </li>
         <li>
             <NavLink to="/contact">CONTACT</NavLink>
-        </li>
-        <li>
-            <NavLink to="/profile">PROFILE</NavLink>
         </li>
     </div>
   )
