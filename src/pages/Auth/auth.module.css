@@ -14,7 +14,7 @@
   max-width: 25rem;
 
 
-  background-color: lightgray;
+  background-color: rgb(150, 150, 150);
   border: 3px solid black;
   border-radius: 8px;
 
@@ -41,7 +41,13 @@
   border-radius: 4px;
 }
 
-.auth input[type='submit'] {
-  width: 45%;
-  padding: 1rem;
+.auth button[type="submit"]{
+    width:45%;
+    padding: .6rem;
+    border-radius: 4px;
 }
+
+.actions{
+    margin-top: 2rem;
+}
+

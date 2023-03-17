@@ -56,7 +56,8 @@ export default function Auth() {
   }
 
   // ** FORM SUBMIT, VALIDATION AND RESET *********************
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault()
     // TODO: submiting to backend
     console.log({ email, gender, date_of_birth: dateOfBirth })
 
@@ -78,7 +79,7 @@ export default function Auth() {
   return (
     <div className={styles.auth}>
       <h2>LOGIN</h2>
-      <form action="#">
+      <form action="#" onSubmit={handleSubmit}>
         <div>
           <label htmlFor="email">email</label>
           <input
@@ -124,12 +125,11 @@ export default function Auth() {
           </select>
         </div>
         <br />
-        <input
-          type="submit"
-          value="SUBMIT"
-          disabled={!isFormValid}
-          onClick={handleSubmit}
-        />
+        <div className={styles.actions}>
+          <button type="submit" disabled={!isFormValid}>
+            SUBMIT
+          </button>
+        </div>
       </form>
     </div>
   )
