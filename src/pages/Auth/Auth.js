@@ -6,7 +6,7 @@ import styles from './auth.module.css'
 // TODO:
 // TODO:
 
-export default function Login() {
+export default function Auth() {
   // * EMAIL *********************
   const [email, setEmail] = useState('')
   const [emailIsValid, setEmailIsValid] = useState(false)
