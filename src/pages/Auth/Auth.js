@@ -1,32 +1,79 @@
 import React, { useState } from 'react'
+import styles from './auth.module.css'
+
+// TODO: Refactor into reusable custom hook
+// TODO: Add Styling for form
+// TODO: 
+// TODO: 
 
 export default function Login() {
+  // * EMAIL *********************
   const [email, setEmail] = useState('')
-  const [dateOfBirth, setDateOfBirth] = useState('')
-  const [gender, setGender] = useState('')
-  // const [isFormValid, setIsFormValid] = useState(false)
+  const [emailIsValid, setEmailIsValid] = useState(false)
+  const [emailIsTouched, setEmailIsTouched] = useState(false)
 
-  const handleEmailChange = async (e) => {
+  const handleEmailChange = (e) => {
     setEmail(e.target.value)
+    setEmailIsTouched(true)
+    // TODO: here we can add validator function
+    if (e.target.value.trim() !== '') setEmailIsValid(true)
   }
-  
-  const handleDOBChange = (e) => {
-    setDateOfBirth(e.target.value)
+
+  const handleEmailBlur = () => {
+    setEmailIsTouched(true)
   }
+
+  // * GENDER *********************
+  const [gender, setGender] = useState('')
+  const [genderIsValid, setGenderIsValid] = useState(false)
+  const [genderIsTouched, setGenderIsTouched] = useState(false)
+
   const handleGenderChange = (e) => {
     setGender(e.target.value)
+    setGenderIsTouched(true)
+    // TODO: here we can add validator function
+    if (e.target.value.trim() !== '') setGenderIsValid(true)
   }
 
+  const handleGenderBlur = () => {
+    setGenderIsTouched(true)
+  }
+
+  // * Date Of Birth *********************
+  const [dateOfBirth, setDateOfBirth] = useState('')
+  const [dateOfBirthIsValid, setDateOfBirthIsValid] = useState(false)
+  const [dateOfBirthIsTouched, setDateOfBirthIsTouched] = useState(false)
+
+  const handleDateOfBirthChange = (e) => {
+    setDateOfBirth(e.target.value)
+    setDateOfBirthIsTouched(true)
+    // TODO: here we can add validator function
+    if (e.target.value.trim() !== '') setDateOfBirthIsValid(true)
+  }
+
+  const handleDateOfBirthBlur = () => {
+    setDateOfBirthIsTouched(true)
+  }
+
+  // ** FORM SUBMIT, VALIDATION AND RESET *********************
   const handleSubmit = () => {
-    console.log({ email, dateOfBirth, gender })
-    setDateOfBirth("")
-    setEmail("")
-    setGender("")
-  }
-// ** FORM VALIDATION AND RESET
-  const isFormValid = !!email && !!gender && !!dateOfBirth
+    // TODO: submiting to backend
+    console.log({email, gender, "date_of_birth": dateOfBirth})
 
-  
+    // TODO: REFACTOR FULL RESET
+    setEmail('')
+    setEmailIsTouched(false)
+    setEmailIsValid(false)
+
+    setGender('')
+    setGenderIsTouched(false)
+    setGenderIsValid(false)
+
+    setDateOfBirth('')
+    setDateOfBirthIsTouched(false)
+    setDateOfBirthIsValid(false)
+  }
+  const isFormValid = emailIsValid && genderIsValid && dateOfBirthIsValid
 
   return (
     <div>
@@ -35,12 +82,14 @@ export default function Login() {
         <div>
           <label htmlFor="email">email:</label>
           <input
-            type="text"
+            type="email"
             name="email"
             id="email"
             value={email}
             onChange={handleEmailChange}
+            onBlur={handleEmailBlur}
             required
+            className={emailIsTouched && !emailIsValid ? styles.invalid : ''}
           />
         </div>
         <div>
@@ -50,14 +99,23 @@ export default function Login() {
             name="dateOfBirth"
             id="dateOfBirth"
             value={dateOfBirth}
-            onChange={handleDOBChange}
+            onChange={handleDateOfBirthChange}
+            onBlur={handleDateOfBirthBlur}
+            className={
+              dateOfBirthIsTouched && !dateOfBirthIsValid ? styles.invalid : ''
+            }
             required
           />
         </div>
         <div>
           <label htmlFor="gender">Gender: </label>
-          <select onChange={handleGenderChange}  required>
-            <option value={""}  selected hidden={true} disabled={true}>
+          <select
+            onChange={handleGenderChange}
+            onBlur={handleGenderBlur}
+            className={genderIsTouched && !genderIsValid ? styles.invalid : ''}
+            required
+          >
+            <option selected={true} hidden={true} disabled={true}>
               Please select gender
             </option>
             <option value="MALE">MALE</option>
@@ -66,14 +124,21 @@ export default function Login() {
           </select>
         </div>
         <br />
-        <input type="submit" value="SUBMIT"  disabled={!isFormValid} onClick={handleSubmit} />
+        <input
+          type="submit"
+          value="SUBMIT"
+          disabled={!isFormValid}
+          onClick={handleSubmit}
+        />
       </form>
     </div>
   )
 }
 
-// const example = {
-//   email: 'radisa_ilic@pfc.com',
-//   date_of_birth: '2023-01-09T19:15:17.132+00:00',
-//   gender: 'MALE',
-// }
+// * How should payload look like:
+
+//* const example = {
+//*   email: 'radisa_ilic@pfc.com',
+//*   date_of_birth: '2023-01-09T19:15:17.132+00:00',
+//*   gender: 'MALE',
+//* }
