@@ -3,8 +3,8 @@ import styles from './auth.module.css'
 
 // TODO: Refactor into reusable custom hook
 // TODO: Add Styling for form
-// TODO: 
-// TODO: 
+// TODO:
+// TODO:
 
 export default function Login() {
   // * EMAIL *********************
@@ -58,7 +58,7 @@ export default function Login() {
   // ** FORM SUBMIT, VALIDATION AND RESET *********************
   const handleSubmit = () => {
     // TODO: submiting to backend
-    console.log({email, gender, "date_of_birth": dateOfBirth})
+    console.log({ email, gender, date_of_birth: dateOfBirth })
 
     // TODO: REFACTOR FULL RESET
     setEmail('')
@@ -76,11 +76,11 @@ export default function Login() {
   const isFormValid = emailIsValid && genderIsValid && dateOfBirthIsValid
 
   return (
-    <div>
-      <h2>Log In Please</h2>
+    <div className={styles.auth}>
+      <h2>LOGIN</h2>
       <form action="#">
         <div>
-          <label htmlFor="email">email:</label>
+          <label htmlFor="email">email</label>
           <input
             type="email"
             name="email"
@@ -93,7 +93,7 @@ export default function Login() {
           />
         </div>
         <div>
-          <label htmlFor="dateOfBirth">Date Of Birth</label>
+          <label htmlFor="dateOfBirth">date of birth</label>
           <input
             type="date"
             name="dateOfBirth"
@@ -108,7 +108,7 @@ export default function Login() {
           />
         </div>
         <div>
-          <label htmlFor="gender">Gender: </label>
+          <label htmlFor="gender">gender</label>
           <select
             onChange={handleGenderChange}
             onBlur={handleGenderBlur}

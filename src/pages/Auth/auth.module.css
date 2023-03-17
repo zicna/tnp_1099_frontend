@@ -1,4 +1,47 @@
-.invalid{
-    background-color: coral;
-   border: 2px solid red
+.invalid {
+  background-color: coral;
+  border: 2px solid red;
+}
+
+.auth {
+  outline: 1px solid red;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  /* height: 500px; */
+  width: 95%;
+  max-width: 25rem;
+
+
+  background-color: lightgray;
+  border: 3px solid black;
+  border-radius: 8px;
+
+  margin: 1rem auto;
+  padding: 1rem;
+}
+
+.auth label {
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+.auth input {
+  margin-bottom: 1rem;
+  width: 60%;
+  height: 1.5rem;
+  border-radius: 4px;
+}
+
+.auth select {
+  margin-bottom: 1rem;
+  width: 60%;
+  height: 1.5rem;
+  border-radius: 4px;
+}
+
+.auth input[type='submit'] {
+  width: 45%;
+  padding: 1rem;
 }
