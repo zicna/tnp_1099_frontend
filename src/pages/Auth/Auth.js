@@ -4,11 +4,12 @@ export default function Login() {
   const [email, setEmail] = useState('')
   const [dateOfBirth, setDateOfBirth] = useState('')
   const [gender, setGender] = useState('')
+  // const [isFormValid, setIsFormValid] = useState(false)
 
   const handleEmailChange = async (e) => {
     setEmail(e.target.value)
   }
-
+  
   const handleDOBChange = (e) => {
     setDateOfBirth(e.target.value)
   }
@@ -18,7 +19,14 @@ export default function Login() {
 
   const handleSubmit = () => {
     console.log({ email, dateOfBirth, gender })
+    setDateOfBirth("")
+    setEmail("")
+    setGender("")
   }
+// ** FORM VALIDATION AND RESET
+  const isFormValid = !!email && !!gender && !!dateOfBirth
+
+  
 
   return (
     <div>
@@ -48,8 +56,8 @@ export default function Login() {
         </div>
         <div>
           <label htmlFor="gender">Gender: </label>
-          <select onChange={handleGenderChange} value={gender} required>
-            <option defaultValue={gender} hidden disabled>
+          <select onChange={handleGenderChange}  required>
+            <option value={""}  selected hidden={true} disabled={true}>
               Please select gender
             </option>
             <option value="MALE">MALE</option>
@@ -58,7 +66,7 @@ export default function Login() {
           </select>
         </div>
         <br />
-        <input type="submit" value="SUBMIT" onClick={handleSubmit} />
+        <input type="submit" value="SUBMIT"  disabled={!isFormValid} onClick={handleSubmit} />
       </form>
     </div>
   )
