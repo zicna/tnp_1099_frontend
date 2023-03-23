@@ -1,12 +1,18 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { UserContext } from '../../storeAndContext/UserProvider'
+// import { UserContext } from '../../storeAndContext/UserProvider'
 import styles from './auth.module.css'
 
 // TODO: Refactor into reusable custom hook
 // TODO: Add Styling for form
-// TODO:
-// TODO:
 
 export default function Auth() {
+  // * Context
+  const { user, setUser } = useContext(UserContext)
+  // *redirect
+  const navigate = useNavigate()
+
   // * EMAIL *********************
   const [email, setEmail] = useState('')
   const [emailIsValid, setEmailIsValid] = useState(false)
@@ -56,10 +62,28 @@ export default function Auth() {
   }
 
   // ** FORM SUBMIT, VALIDATION AND RESET *********************
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     // TODO: submiting to backend
-    console.log({ email, gender, date_of_birth: dateOfBirth })
+    const payload = { email, gender, date_of_birth: dateOfBirth }
+    console.log(payload)
+    try {
+      const response = await fetch('http://localhost:8080/user', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      })
+      if (!response.ok) throw new Error(response.statusText)
+      const data = await response.json()
+      console.log(data)
+      setUser(data)
+      navigate('/profile', { replace: true })
+    } catch (error) {
+      console.log(error)
+    }
 
     // TODO: REFACTOR FULL RESET
     setEmail('')
