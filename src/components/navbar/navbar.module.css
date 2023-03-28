@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  align-items: center;
+  background-color: lightblue;
+}
+
+.liContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.liContainer li {
+    list-style-type: none;
+    margin-left: 1rem;
+}
+
+.navlink{
+    color: black;
+    font-weight: 500;
+    text-decoration: none;
+    padding: .7rem 1.2rem;
+    border-top-left-radius: 12px;
+    border-bottom-right-radius: 12px ;
+}
+.navlink:hover{
+    background-color: rgba(76, 76, 76, .1);
+}

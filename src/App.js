@@ -1,7 +1,7 @@
 import './App.css';
 import RoutesContainer from './containers/RoutesContainer';
 
-import NavBar from './components/NavBar';
+import NavBar from './components/navbar/NavBar';
 
 function App() {
   return (
