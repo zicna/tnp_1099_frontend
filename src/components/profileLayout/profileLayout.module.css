@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background-color: rgb(130, 176, 191);
+}
+
+.liContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.liContainer li {
+  list-style-type: none;
+  margin-left: 1rem;
+}
+
+.navlink {
+    color: black;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 0.7rem 1.2rem;
+    border-top-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.navlink:hover {
+    background-color: rgba(76, 76, 76, 0.1);
+}
+
+.logo{
+    list-style-type: none;
+    color: black;
+    font-weight: 500;
+    text-decoration: none;
+
+  }

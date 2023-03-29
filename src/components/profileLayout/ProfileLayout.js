@@ -4,24 +4,25 @@ import { NavLink, Outlet } from 'react-router-dom'
 
 export default function ProfileLayout() {
   return (
-    <div className={styles.container}>
-      <div>
-        <NavLink to="/profile">LOGO</NavLink>
+    <>
+      <div className={styles.container}>
+        <div>
+          <NavLink to="/profile" className={styles.logo}>USER LOGO</NavLink>
+        </div>
+        <div className={styles.liContainer}>
+          <li>
+            <NavLink to="/profile/earnings" className={styles.navlink}>EARNINGS</NavLink>
+          </li>
+          <li>
+            <NavLink to="/profile/trips" className={styles.navlink}>TRIPS</NavLink>
+          </li>
+          <li>
+            <NavLink to="/profile/expenses" className={styles.navlink}>EXPENSES</NavLink>
+          </li>
+        </div>
       </div>
-      <div>
-        <li>
-          <NavLink to="/profile/earnings">EARNINGS</NavLink>
-        </li>
-        <li>
-          <NavLink to="/profile/trips">TRIPS</NavLink>
-        </li>
-        <li>
-          <NavLink to="/profile/expenses">EXPENSES</NavLink>
-        </li>
-        
         <Outlet />
-      </div>
-    </div>
+    </>
   )
 }
 
