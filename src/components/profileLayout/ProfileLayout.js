@@ -18,8 +18,12 @@ export default function ProfileLayout() {
         <li>
           <NavLink to="/profile/expenses">EXPENSES</NavLink>
         </li>
+        
         <Outlet />
       </div>
     </div>
   )
 }
+
+// !  <Outlet />
+// * this allows to specific component to be rendered on URL '/profile/...something... besides <ProfileLayout />'
