@@ -1,0 +1,17 @@
+Refactoring Input (Any)Field:
+
+each input has 3 type of state:
+
+1. input value
+    a. function that will set value
+2. input validity (true / false) 
+    a. function that will set value for input validity
+3. input was touched (true / false) 
+    a. function that will set value for input was touched
+
+each input uses these 2 functions:
+1. handleInputChange
+    instant input value update
+2. handleInputBlur 
+    instant change of "input was touched" state
+
