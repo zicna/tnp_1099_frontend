@@ -10,8 +10,8 @@ import Auth from '../pages/Auth/Auth'
 import { UserContext } from '../storeAndContext/UserProvider'
 import ProfileLayout from '../components/profileLayout/ProfileLayout'
 import Trips from '../pages/Trips'
-import Expenses from '../pages/Expenses'
 import Earnings from '../pages/Earnings'
+import ExpenseContainer from '../pages/expense/ExpenseContainer'
 
 export default function RoutesContainer() {
   const { user } = useContext(UserContext)
@@ -25,7 +25,7 @@ export default function RoutesContainer() {
           <Route path="/profile" element={<ProfileLayout />}>
             <Route index element={<Profile />}></Route>
             <Route path="trips" element={<Trips />}></Route>
-            <Route path="expenses" element={<Expenses />}></Route>
+            <Route path="expenses" element={<ExpenseContainer />}></Route>
             <Route path="earnings" element={<Earnings />}></Route>
           </Route>
         ) : (
