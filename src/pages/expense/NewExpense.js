@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { UserContext } from '../../storeAndContext/UserProvider'
+import styles from './newExpense.module.css'
 
 export default function NewExpense({ setShowForm }) {
   // *** TYPING
@@ -23,7 +24,7 @@ export default function NewExpense({ setShowForm }) {
   const handleDescChange = (e) => {
     setDesc(e.target.value)
   }
-  // *** SUBMITING
+  // *** SUBMITING *****************************
   const handleSubmit = () => {
     // * hide form after submiting
     console.log({ type, amount, date, desc }, user)
@@ -43,49 +44,63 @@ export default function NewExpense({ setShowForm }) {
 
     setShowForm((prevState) => !prevState)
   }
+
+  const handleCancelClick = () => {
+    setShowForm((prevState) => !prevState)
+  }
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="type">TYPE: </label>
-        <select onChange={handleTypeChange}>
-          <option
-            value={'Please select type of expense'}
-            hidden={true}
-            disabled={true}
-          >
-            Please select type of expense
-          </option>
-          <option value="GAS">GAS</option>
-          <option value="WASH">WASH</option>
-          <option value="TOLL">TOLL</option>
-          <option value="REPAIR">REPAIR</option>
-          <option value="MISCELLANEOUS">MISCELLANEOUS</option>
-          <option value="TICKET">TICKET</option>
-        </select>
-      </div>
-      <div>
-        <label htmlFor="amount">AMOUNT: </label>
-        <input
-          type="number"
-          value={amount}
-          min={0.01}
-          step={0.01}
-          onChange={handleAmountChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="date">DATE: </label>
-        <input type="date" value={date} onChange={handleDateChange} />
-      </div>
-      <div>
-        <label htmlFor="description">DESCRIPTION</label>
-        <input type="text" value={desc} onChange={handleDescChange} />
-      </div>
-      <div>
-        <button type="submit" disabled={false}>
-          SUBMIT
-        </button>
-      </div>
-    </form>
+    <div className={styles.container}>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <fieldset className={styles.fieldset
+        }>
+        <legend className={styles.legend}>Create new Expense</legend>
+          <div className={styles.inputContainer}>
+            <label htmlFor="type">TYPE: </label>
+            <select onChange={handleTypeChange} className={styles.select}>
+              <option
+                value={'Please select type of expense'}
+                hidden={true}
+                disabled={true}
+              >
+                Please select type of expense
+              </option>
+              <option value="GAS">GAS</option>
+              <option value="WASH">WASH</option>
+              <option value="TOLL">TOLL</option>
+              <option value="REPAIR">REPAIR</option>
+              <option value="MISCELLANEOUS">MISCELLANEOUS</option>
+              <option value="TICKET">TICKET</option>
+            </select>
+          </div>
+          <div className={styles.inputContainer}>
+            <label htmlFor="amount">AMOUNT: </label>
+            <input
+              type="number"
+              value={amount}
+              min={0.01}
+              step={0.01}
+              onChange={handleAmountChange}
+            />
+          </div>
+          <div className={styles.inputContainer}>
+            <label htmlFor="date">DATE: </label>
+            <input type="date" value={date} onChange={handleDateChange} />
+          </div>
+          <div className={styles.inputContainer}>
+            <label htmlFor="description">DESCRIPTION: </label>
+            <input type="text" value={desc} onChange={handleDescChange} />
+          </div>
+          <div className={`${styles.inputContainer}, ${styles.actions}`}>
+            <button type="submit" disabled={true}>
+              SUBMIT
+            </button>
+            <button type="reset" disabled={true} onClick={handleCancelClick}>
+              CANCEL
+            </button>
+          </div>
+        
+        </fieldset>
+      </form>
+    </div>
   )
 }
