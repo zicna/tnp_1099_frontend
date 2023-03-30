@@ -5,7 +5,7 @@ const obj = {
   dateOfBirth: '2023-03-28T00:00:00.000+00:00',
   email: 'ruby_master@example.com',
   gender: 'FEMALE',
-  id: 3,
+  id: 1,
 }
 export const UserContext = createContext(null)
 
