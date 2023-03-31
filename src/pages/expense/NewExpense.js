@@ -1,29 +1,46 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
+import { useInput } from '../../hooks/useInput'
 import { UserContext } from '../../storeAndContext/UserProvider'
 import styles from './newExpense.module.css'
 
 export default function NewExpense({ setShowForm }) {
-  // *** TYPING
-
   const { user } = useContext(UserContext)
+  // ****REFACTOR STARTS HERE*********
+  const {
+    input: type,
+    inputValid: typeValid,
+    inputTouched: typeTouched,
+    handleInputChange: handleTypeChange,
+    handleInputBlur: handleTypeBlur,
+    resetInput: resetType,
+  } = useInput()
+  const {
+    input: amount,
+    inputValid: amountValid,
+    inputTouched: amountTouched,
+    handleInputChange: handleAmountChange,
+    handleInputBlur: handleAmountBlur,
+    resetInput: resetAmount,
+  } = useInput()
+  const {
+    input: date,
+    inputValid: dateValid,
+    inputTouched: dateTouched,
+    handleInputChange: handleDateChange,
+    handleInputBlur: handleDateBlur,
+    resetInput: resetDate,
+  } = useInput()
+  const {
+    input: desc,
+    inputValid: descValid,
+    inputTouched: descTouched,
+    handleInputChange: handleDescChange,
+    handleInputBlur: handleDescBlur,
+    resetInput: resetDesc,
+  } = useInput()
+  // **********************************
 
-  const [type, setType] = useState('')
-  const [amount, setAmount] = useState(0)
-  const [date, setDate] = useState('')
-  const [desc, setDesc] = useState('')
-
-  const handleTypeChange = (e) => {
-    setType(e.target.value)
-  }
-  const handleAmountChange = (e) => {
-    setAmount(e.target.value)
-  }
-  const handleDateChange = (e) => {
-    setDate(e.target.value)
-  }
-  const handleDescChange = (e) => {
-    setDesc(e.target.value)
-  }
+  const fromValid = typeValid && amountValid && dateValid && descValid
   // *** SUBMITING *****************************
   const handleSubmit = () => {
     // * hide form after submiting
@@ -42,6 +59,11 @@ export default function NewExpense({ setShowForm }) {
       })
       .then((data) => console.log(data))
 
+    resetAmount()
+    resetDate()
+    resetDesc()
+    resetType()
+
     setShowForm((prevState) => !prevState)
   }
 
@@ -51,12 +73,15 @@ export default function NewExpense({ setShowForm }) {
   return (
     <div className={styles.container}>
       <form onSubmit={handleSubmit} className={styles.form}>
-        <fieldset className={styles.fieldset
-        }>
-        <legend className={styles.legend}>Create new Expense</legend>
+        <fieldset className={styles.fieldset}>
+          <legend className={styles.legend}>Create new Expense</legend>
           <div className={styles.inputContainer}>
             <label htmlFor="type">TYPE: </label>
-            <select onChange={handleTypeChange} className={styles.select}>
+            <select
+              onChange={handleTypeChange}
+              onBlur={handleTypeBlur}
+              className={`styles.select`}
+            >
               <option
                 value={'Please select type of expense'}
                 hidden={true}
@@ -80,25 +105,38 @@ export default function NewExpense({ setShowForm }) {
               min={0.01}
               step={0.01}
               onChange={handleAmountChange}
-            />
+              onBlur={handleAmountBlur}
+              className={amountTouched && !amountValid ? styles.invalid : ''}
+              />
           </div>
           <div className={styles.inputContainer}>
             <label htmlFor="date">DATE: </label>
-            <input type="date" value={date} onChange={handleDateChange} />
+            <input
+              type="date"
+              value={date}
+              onChange={handleDateChange}
+              onBlur={handleDateBlur}
+              className={dateTouched && !dateValid ? styles.invalid : ''}
+              />
           </div>
           <div className={styles.inputContainer}>
             <label htmlFor="description">DESCRIPTION: </label>
-            <input type="text" value={desc} onChange={handleDescChange} />
+            <input
+              type="text"
+              value={desc}
+              onChange={handleDescChange}
+              onBlur={handleDescBlur}
+              className={descTouched && !descValid ? styles.invalid : ''}
+            />
           </div>
           <div className={`${styles.inputContainer}, ${styles.actions}`}>
-            <button type="submit" disabled={true}>
+            <button type="submit" disabled={!fromValid}>
               SUBMIT
             </button>
-            <button type="reset" disabled={true} onClick={handleCancelClick}>
+            <button type="reset" disabled={false} onClick={handleCancelClick}>
               CANCEL
             </button>
           </div>
-        
         </fieldset>
       </form>
     </div>
