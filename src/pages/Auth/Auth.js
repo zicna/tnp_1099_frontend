@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useInput } from '../../hooks/useInput'
 import { UserContext } from '../../storeAndContext/UserProvider'
 // import { UserContext } from '../../storeAndContext/UserProvider'
 import styles from './auth.module.css'
@@ -8,58 +9,34 @@ import styles from './auth.module.css'
 // TODO: Add Styling for form
 
 export default function Auth() {
-  // * Context
   const { user, setUser } = useContext(UserContext)
-  // *redirect
   const navigate = useNavigate()
 
-  // * EMAIL *********************
-  const [email, setEmail] = useState('')
-  const [emailIsValid, setEmailIsValid] = useState(false)
-  const [emailIsTouched, setEmailIsTouched] = useState(false)
+  const {
+    input: email,
+    inputValid: emailValid,
+    inputTouched: emailTouched,
+    handleInputChange: handleEmailChange,
+    handleInputBlur: handleEmailBlur,
+    resetInput: restEmail,
+  } = useInput()
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value)
-    setEmailIsTouched(true)
-    // TODO: here we can add validator function
-    if (e.target.value.trim() !== '') setEmailIsValid(true)
-  }
-
-  const handleEmailBlur = () => {
-    setEmailIsTouched(true)
-  }
-
-  // * GENDER *********************
-  const [gender, setGender] = useState('')
-  const [genderIsValid, setGenderIsValid] = useState(false)
-  const [genderIsTouched, setGenderIsTouched] = useState(false)
-
-  const handleGenderChange = (e) => {
-    setGender(e.target.value)
-    setGenderIsTouched(true)
-    // TODO: here we can add validator function
-    if (e.target.value.trim() !== '') setGenderIsValid(true)
-  }
-
-  const handleGenderBlur = () => {
-    setGenderIsTouched(true)
-  }
-
-  // * Date Of Birth *********************
-  const [dateOfBirth, setDateOfBirth] = useState('')
-  const [dateOfBirthIsValid, setDateOfBirthIsValid] = useState(false)
-  const [dateOfBirthIsTouched, setDateOfBirthIsTouched] = useState(false)
-
-  const handleDateOfBirthChange = (e) => {
-    setDateOfBirth(e.target.value)
-    setDateOfBirthIsTouched(true)
-    // TODO: here we can add validator function
-    if (e.target.value.trim() !== '') setDateOfBirthIsValid(true)
-  }
-
-  const handleDateOfBirthBlur = () => {
-    setDateOfBirthIsTouched(true)
-  }
+  const {
+    input: gender,
+    inputValid: genderValid,
+    inputTouched: genderTouched,
+    handleInputChange: handleGenderChange,
+    handleInputBlur: handleGenderBlur,
+    resetInput: restGender,
+  } = useInput()
+  const {
+    input: dateOfBirth,
+    inputValid: dateOfBirthValid,
+    inputTouched: dateOfBirthTouched,
+    handleInputChange: handleDateOfBirthChange,
+    handleInputBlur: handleDateOfBirthBlur,
+    resetInput: restDateOfBirth,
+  } = useInput()
 
   // ** FORM SUBMIT, VALIDATION AND RESET *********************
   const handleSubmit = async (e) => {
@@ -86,19 +63,11 @@ export default function Auth() {
     }
 
     // TODO: REFACTOR FULL RESET
-    setEmail('')
-    setEmailIsTouched(false)
-    setEmailIsValid(false)
-
-    setGender('')
-    setGenderIsTouched(false)
-    setGenderIsValid(false)
-
-    setDateOfBirth('')
-    setDateOfBirthIsTouched(false)
-    setDateOfBirthIsValid(false)
+    restEmail()
+    restGender()
+    restDateOfBirth()
   }
-  const isFormValid = emailIsValid && genderIsValid && dateOfBirthIsValid
+  const formValid = emailValid && genderValid && dateOfBirthValid
 
   return (
     <div className={styles.auth}>
@@ -114,7 +83,7 @@ export default function Auth() {
             onChange={handleEmailChange}
             onBlur={handleEmailBlur}
             required
-            className={emailIsTouched && !emailIsValid ? styles.invalid : ''}
+            className={emailTouched && !emailValid ? styles.invalid : ''}
           />
         </div>
         <div>
@@ -127,7 +96,7 @@ export default function Auth() {
             onChange={handleDateOfBirthChange}
             onBlur={handleDateOfBirthBlur}
             className={
-              dateOfBirthIsTouched && !dateOfBirthIsValid ? styles.invalid : ''
+              dateOfBirthTouched && !dateOfBirthValid ? styles.invalid : ''
             }
             required
           />
@@ -137,7 +106,7 @@ export default function Auth() {
           <select
             onChange={handleGenderChange}
             onBlur={handleGenderBlur}
-            className={genderIsTouched && !genderIsValid ? styles.invalid : ''}
+            className={genderTouched && !genderValid ? styles.invalid : ''}
             required
           >
             <option selected={true} hidden={true} disabled={true}>
@@ -150,7 +119,7 @@ export default function Auth() {
         </div>
         <br />
         <div className={styles.actions}>
-          <button type="submit" disabled={!isFormValid}>
+          <button type="submit" disabled={!formValid}>
             SUBMIT
           </button>
         </div>
