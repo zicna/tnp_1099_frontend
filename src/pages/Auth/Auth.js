@@ -1,12 +1,11 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useInput } from '../../hooks/useInput'
 import { UserContext } from '../../storeAndContext/UserProvider'
-// import { UserContext } from '../../storeAndContext/UserProvider'
 import styles from './auth.module.css'
 
-// TODO: Refactor into reusable custom hook
-// TODO: Add Styling for form
+// TODO: remove 'invalid' style from <select> on start
+// TODO: refactor submiting into external function
 
 export default function Auth() {
   const { user, setUser } = useContext(UserContext)

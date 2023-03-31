@@ -3,9 +3,13 @@ import { useInput } from '../../hooks/useInput'
 import { UserContext } from '../../storeAndContext/UserProvider'
 import styles from './newExpense.module.css'
 
+// TODO: remove 'invalid' style from <select> on start
+// TODO: refactor submiting into external function
+
+
 export default function NewExpense({ setShowForm }) {
   const { user } = useContext(UserContext)
-  // ****REFACTOR STARTS HERE*********
+  
   const {
     input: type,
     inputValid: typeValid,
@@ -38,7 +42,6 @@ export default function NewExpense({ setShowForm }) {
     handleInputBlur: handleDescBlur,
     resetInput: resetDesc,
   } = useInput()
-  // **********************************
 
   const fromValid = typeValid && amountValid && dateValid && descValid
   // *** SUBMITING *****************************
@@ -69,6 +72,10 @@ export default function NewExpense({ setShowForm }) {
 
   const handleCancelClick = () => {
     setShowForm((prevState) => !prevState)
+    resetAmount()
+    resetDate()
+    resetDesc()
+    resetType()
   }
   return (
     <div className={styles.container}>
@@ -80,7 +87,11 @@ export default function NewExpense({ setShowForm }) {
             <select
               onChange={handleTypeChange}
               onBlur={handleTypeBlur}
-              className={`styles.select`}
+              className={
+                `styles.select` + typeTouched && !typeValid
+                  ? styles.invalid
+                  : ''
+              }
             >
               <option
                 value={'Please select type of expense'}
@@ -107,7 +118,7 @@ export default function NewExpense({ setShowForm }) {
               onChange={handleAmountChange}
               onBlur={handleAmountBlur}
               className={amountTouched && !amountValid ? styles.invalid : ''}
-              />
+            />
           </div>
           <div className={styles.inputContainer}>
             <label htmlFor="date">DATE: </label>
@@ -117,7 +128,7 @@ export default function NewExpense({ setShowForm }) {
               onChange={handleDateChange}
               onBlur={handleDateBlur}
               className={dateTouched && !dateValid ? styles.invalid : ''}
-              />
+            />
           </div>
           <div className={styles.inputContainer}>
             <label htmlFor="description">DESCRIPTION: </label>
