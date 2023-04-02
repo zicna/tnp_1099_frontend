@@ -7,21 +7,29 @@ export default function ProfileLayout() {
     <>
       <div className={styles.container}>
         <div>
-          <NavLink to="/profile" className={styles.logo}>USER LOGO</NavLink>
+          <NavLink to="/profile" className={styles.logo}>
+            USER LOGO
+          </NavLink>
         </div>
         <div className={styles.liContainer}>
           <li>
-            <NavLink to="/profile/earnings" className={styles.navlink}>EARNINGS</NavLink>
+            <NavLink to="/profile/earnings" className={styles.navlink}>
+              EARNINGS
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/profile/trips" className={styles.navlink}>TRIPS</NavLink>
+            <NavLink to="/profile/trips" className={styles.navlink}>
+              TRIPS
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/profile/expenses" className={styles.navlink}>EXPENSES</NavLink>
+            <NavLink to="/profile/expenses" className={styles.navlink}>
+              EXPENSES
+            </NavLink>
           </li>
         </div>
       </div>
-        <Outlet />
+      <Outlet />
     </>
   )
 }

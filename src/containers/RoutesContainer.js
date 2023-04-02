@@ -12,6 +12,8 @@ import ProfileLayout from '../components/profileLayout/ProfileLayout'
 import Trips from '../pages/Trips'
 import Earnings from '../pages/Earnings'
 import ExpenseContainer from '../pages/expense/ExpenseContainer'
+import ExpenseList from '../pages/expense/ExpenseList'
+import NewExpense from '../pages/expense/NewExpense'
 
 export default function RoutesContainer() {
   const { user } = useContext(UserContext)
@@ -25,7 +27,15 @@ export default function RoutesContainer() {
           <Route path="/profile" element={<ProfileLayout />}>
             <Route index element={<Profile />}></Route>
             <Route path="trips" element={<Trips />}></Route>
-            <Route path="expenses" element={<ExpenseContainer />}></Route>
+            <Route path="expenses" element={<ExpenseContainer />}>
+              <Route path="all" element={<ExpenseList></ExpenseList>}></Route>
+              <Route
+                path="this-week"
+                element={<ExpenseList></ExpenseList>}
+              ></Route>
+              <Route path="new" element={<NewExpense />}></Route>
+            </Route>
+
             <Route path="earnings" element={<Earnings />}></Route>
           </Route>
         ) : (

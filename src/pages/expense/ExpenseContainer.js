@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import NewExpense from './NewExpense'
+import React from 'react'
 import ExpenseLayout from '../../components/expenseLayout/ExpenseLayout'
 
 export default function ExpenseContainer() {
@@ -10,7 +9,6 @@ export default function ExpenseContainer() {
     </div>
   )
 }
-
 
 // * JSON file construction
 
