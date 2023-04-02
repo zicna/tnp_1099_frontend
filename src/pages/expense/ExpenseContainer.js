@@ -1,24 +1,18 @@
 import React, { useState } from 'react'
 import NewExpense from './NewExpense'
+import ExpenseLayout from '../../components/expenseLayout/ExpenseLayout'
 
 export default function ExpenseContainer() {
-  const [showForm, setShowForm] = useState(false)
-
-  const handleShowFormClick = () => {
-    setShowForm((prevState) => !prevState)
-  }
   return (
     <div>
       <h3>Expense Container</h3>
-
-      {showForm ? (
-        <NewExpense setShowForm={setShowForm}></NewExpense>
-      ) : (
-        <button onClick={handleShowFormClick}>Add New Expense</button>
-      )}
+      <ExpenseLayout></ExpenseLayout>
     </div>
   )
 }
+
+
+// * JSON file construction
 
 // {
 //     "type": "GAS",
